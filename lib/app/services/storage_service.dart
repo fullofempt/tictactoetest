@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:tictactoetest/app/models/apimodel/apimodel.dart';
 
 class StorageService extends GetxService {
-  final FlutterSecureStorage _storage = const FlutterSecureStorage();
+  final FlutterSecureStorage _storage = FlutterSecureStorage();
 
   Future<String?> read(String key) async {
     return await _storage.read(key: key);
@@ -20,4 +20,6 @@ class StorageService extends GetxService {
   }
 }
 
-class FlutterSecureStorage {}
+Future<void> initServices() async {
+  await Get.putAsync(() async => StorageService());
+}

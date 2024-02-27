@@ -1,3 +1,4 @@
+//конвертор пароля и тд
 import 'dart:convert';
 import 'package:http/http.dart';
 
@@ -12,3 +13,4 @@ void getBaseAuth(ApiModel user) {
       'Basic ${base64.encode(utf8.encode('${user.User.username}:${user.private_key}'))}';
   storageService.writeBaseAuth("baseAuth", baseAuth);
 }
+
