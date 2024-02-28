@@ -20,9 +20,10 @@ class LoginView extends GetView<LoginController> {
           children: [
             TextFormField(
               controller: controller.usernameController,
-              decoration: InputDecoration(labelText: 'Никнейм'),
+              decoration: InputDecoration(labelText: 'Введите имя'),
             ),
             SizedBox(
+              width: 110,
               height: 45,
             ),
             ElevatedButton(
