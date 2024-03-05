@@ -18,16 +18,18 @@ class LoginView extends GetView<LoginController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
-              controller: controller.usernameController,
-              decoration: const InputDecoration(labelText: 'Введите имя'),
-            ),
-            SizedBox(
-              width: 110,
-              height: 45,
-            ),
-            ElevatedButton(
-                onPressed: () => controller.login(), child: Text('Войти')),
+            Container(width: 300,
+              child: TextFormField(
+                controller: controller.usernameController,
+                decoration: const InputDecoration(labelText: 'Введите имя'),
+              ),
+              ),
+              SizedBox(
+                width: 110,
+                height: 45,
+              ),
+              ElevatedButton(
+                  onPressed: () => controller.login(), child: Text('Войти')),
           ],
         ),
       ),

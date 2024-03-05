@@ -13,6 +13,7 @@ class LobbyView extends GetView<LobbyController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,10 +26,10 @@ class LobbyView extends GetView<LobbyController> {
                   itemCount: lobbyController.testSession.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                      padding: EdgeInsets.all(16.0),
+                      margin: EdgeInsets.symmetric(vertical: 2),
+                      padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Color.fromRGBO(169, 169, 169, 1),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: ListTile(
@@ -125,41 +126,45 @@ class LobbyView extends GetView<LobbyController> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("Создать сессию"),
-                      content: TextFormField(
-                        controller: lobbyController.sessionnameController,
-                        decoration:
-                            InputDecoration(labelText: "Название сессии"),
-                      ),
-                      actions: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          child: Text("Отмена"),
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              child: ElevatedButton(
+                
+                onPressed: () async {
+                  await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("Создать сессию"),
+                        content: TextFormField(
+                          controller: lobbyController.sessionnameController,
+                          decoration:
+                              InputDecoration(labelText: "Название сессии"),
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            lobbyController.createSession(
-                                lobbyController.sessionnameController.text);
-                          },
-                          child: Text("Создать"),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-              child: Text("Создать сессию"),
+                        actions: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text("Отмена"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              lobbyController.createSession(
+                                  lobbyController.sessionnameController.text);
+                            },
+                            child: Text("Создать"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Text("Создать сессию"),
+              ),
             ),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.bottomCenter,
               child: Column(
                 children: [
                   SizedBox(

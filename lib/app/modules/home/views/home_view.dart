@@ -14,24 +14,26 @@ class Home extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Добро Пожаловать в Крестики Нолики"),
-            Container(
-              child: ElevatedButton(
-                onPressed: () => Get.toNamed(Routes.LOGIN),
-                child: Text('Логин'),
+      body: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Добро Пожаловать в Крестики Нолики"),
+              Container(
+                child: ElevatedButton(
+                  onPressed: () => Get.toNamed(Routes.LOGIN),
+                  child: Text('Логин'),
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                  onPressed: () => Get.toNamed(Routes.LOBBY),
-                  child: Text('Лобби')),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: ElevatedButton(
+                    onPressed: () => Get.toNamed(Routes.LOBBY),
+                    child: Text('Лобби')),
+              ),
+            ],
+          ),
         ),
       ),
     );

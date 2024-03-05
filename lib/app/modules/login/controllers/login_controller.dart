@@ -19,7 +19,7 @@ class LoginController extends GetxController {
     //       .post('https://ttt.bulbaman.me/user/add/${usernameController.text}');
     //   print(response.data);
     if (await networkServices.addUser(usernameController.text)) {
-      Get.offAndToNamed(Routes.LOBBY);
+      Get.toNamed(Routes.LOBBY);
     } else {
       Get.snackbar(
         "Ошибка",
