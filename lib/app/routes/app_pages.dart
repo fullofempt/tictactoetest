@@ -1,8 +1,6 @@
 import 'package:get/get.dart' show GetPage;
 
 import '../modules/game/bindings/game_binding.dart';
-import '../modules/game/bindings/game_binding.dart';
-import '../modules/game/views/game_view.dart';
 import '../modules/game/views/game_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -16,7 +14,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -31,7 +29,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOBBY,
-      page: () => const LobbyView(),
+      page: () => LobbyView(),
       binding: LobbyBinding(),
     ),
     GetPage(
