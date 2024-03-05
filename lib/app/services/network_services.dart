@@ -4,11 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:tictactoetest/app/models/apimodel/apimodel.dart';
 import 'package:tictactoetest/app/models/connection/connection.dart';
+import 'package:tictactoetest/app/models/testSession/testSession.dart';
 import 'package:tictactoetest/app/services/services.dart';
 import 'package:tictactoetest/app/services/storage_service.dart';
-// import 'package:tictactoetest/app/core/constants.dart';
-// import 'package:tictactoetest/app/services/services.dart';
-// import 'package:tictactoetest/app/services/storage_service.dart';
 
 var baseUrl = "https://ttt.bulbaman.me/user/add/";
 
@@ -52,13 +50,13 @@ class NetworkServices extends GetxController {
     }
   }
 
-  Future<List<Connection>?> getSessions() async {
+  Future<List<TestSession>?> getSessions() async {
     try {
       var response = await httpClient.get('$baseUrl/session/get_all');
       if (response.statusCode == 200) {
         List<Map<String, dynamic>> sessionsData = List.castFrom(response.data);
-        List<Connection> sessionsList =
-            sessionsData.map((data) => Connection.fromJson(data)).toList();
+        List<TestSession> sessionsList =
+            sessionsData.map((data) => TestSession.fromJson(data)).toList();
 
         return sessionsList;
       } else {
@@ -81,8 +79,8 @@ class NetworkServices extends GetxController {
         print(response.statusCode);
         return null;
       }
-    } catch (e) {
-      print(e);
+    } catch (erorr) {
+      print(erorr);
       return null;
     }
   }
@@ -149,7 +147,8 @@ class NetworkServices extends GetxController {
         var updateUser = ApiModel(
             private_key: data.private_key,
             user: UserData(in_session: null, username: data.user.username));
-        await storageService.writeUserResponse('user', updateUser as Connection);
+        await storageService.writeUserResponse(
+            'user', updateUser as Connection);
         return true;
       } else {
         print("Код ошибки: ${response.statusCode}");

@@ -39,7 +39,7 @@ class LobbyView extends GetView<LobbyController> {
                           ),
                         ),
                         subtitle: Text(
-                          "Хост: ${lobbyController.testSession[index].host_name}",
+                          "Имя хоста игры: ${lobbyController.testSession[index].host_name}",
                           style: TextStyle(
                             color: Color.fromARGB(255, 61, 0, 204),
                           ),
@@ -51,24 +51,16 @@ class LobbyView extends GetView<LobbyController> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text("Информация о сессии"),
+                                title: Text("О сессии"),
                                 actions: [
                                   Center(
                                     child: Column(
                                       children: [
-                                        Text(
-                                          "Имя сессии: ${lobbyController.currentSession.value.name}",
-                                        ),
-                                        Text(
-                                            "Никнейм гостя: ${lobbyController.currentSession.value.guest_name ?? "никого нет"}"),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
                                         Obx(() {
                                           if (lobbyController.currentSession
                                                   .value.host_name ==
-                                              lobbyController.currentUser
-                                                  .value.user.username) {
+                                              lobbyController.currentUser.value
+                                                  .user.username) {
                                             return ElevatedButton(
                                               onPressed: () {
                                                 if (lobbyController
@@ -76,18 +68,17 @@ class LobbyView extends GetView<LobbyController> {
                                                         .value
                                                         .guest_name !=
                                                     null) {
-                                                  lobbyController
-                                                      .startSession(
-                                                          lobbyController
-                                                              .currentSession
-                                                              .value
-                                                              .id);
+                                                  lobbyController.startSession(
+                                                      lobbyController
+                                                          .currentSession
+                                                          .value
+                                                          .id);
                                                 } else {
-                                                  Get.snackbar("Ошибка",
-                                                      "Нет второго игрока");
+                                                  Get.snackbar(
+                                                      "Ошибка", "Нет второго");
                                                 }
                                               },
-                                              child: Text("Запустить игру"),
+                                              child: Text("Играть"),
                                             );
                                           } else {
                                             return ElevatedButton(

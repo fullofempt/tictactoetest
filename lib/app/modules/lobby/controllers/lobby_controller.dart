@@ -8,16 +8,13 @@ import 'package:tictactoetest/app/services/network_services.dart';
 import 'package:tictactoetest/app/services/storage_service.dart';
 
 class LobbyController extends GetxController {
+  RxList<TestSession> testSession = <TestSession>[].obs;
   StorageService storageService = StorageService();
   NetworkServices networkServices = NetworkServices();
   Rx<Connection> currentSession = Connection().obs;
   final newUserNicknameController = TextEditingController();
   final sessionnameController = TextEditingController();
   Rx<ApiModel> currentUser = ApiModel(user: UserData()).obs;
-
-  get testSession => null;
-
-  get sessionId => null;
 
   @override
   void onInit() {
@@ -53,20 +50,18 @@ class LobbyController extends GetxController {
   }
 
   Future<void> getSessions() async {
-    TestSession.assignAll(await networkServices.getSessions() ?? []);
+    testSession.assignAll(await networkServices.getSessions() ?? []);
     if (testSession.isEmpty) {
-      Get.snackbar("Ошибка", "Нет Сессии",
-          backgroundColor: Colors.red);
+      Get.snackbar("Ошибка", "Нет Сессии", backgroundColor: Colors.red);
     }
   }
 
   Future<void> getSessionById(String sessions) async {
-    var data = await networkServices.getSessionById(sessionId);
+    var data = await networkServices.getSessionById(sessions);
     if (data != null) {
       currentSession.value = data;
     } else {
-      Get.snackbar(
-          "Ошибка", "Нет ответа о сессии",
+      Get.snackbar("Ошибка", "Нет ответа о сессии",
           backgroundColor: Colors.red);
     }
   }

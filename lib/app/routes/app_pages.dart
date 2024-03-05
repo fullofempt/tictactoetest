@@ -4,6 +4,8 @@ import '../modules/game/bindings/game_binding.dart';
 import '../modules/game/views/game_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/loading/bindings/loading_binding.dart';
+import '../modules/loading/views/loading_view.dart';
 import '../modules/lobby/bindings/lobby_binding.dart';
 import '../modules/lobby/views/lobby_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -19,7 +21,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => Home(),
+      page: () => const Home(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -43,6 +45,11 @@ class AppPages {
           binding: GameBinding(),
         ),
       ],
+    ),
+    GetPage(
+      name: _Paths.LOADING,
+      page: () => const LoadingView(),
+      binding: LoadingBinding(),
     ),
   ];
 }
