@@ -274,7 +274,7 @@ class __$$UserDataImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$UserDataImpl implements _UserData {
-  _$UserDataImpl({this.in_session = null, this.username = ''});
+  _$UserDataImpl({this.in_session = '', this.username = ''});
 
   factory _$UserDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserDataImplFromJson(json);

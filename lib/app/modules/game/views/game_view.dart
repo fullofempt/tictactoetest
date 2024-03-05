@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tictactoetest/app/modules/game/controllers/game_controller.dart';
+import 'package:tictactoetest/app/modules/game/xofield/xofield_controller.dart';
+import 'package:tictactoetest/app/modules/game/xofield/xofield_veiw.dart';
+
 
 class GameView extends GetView<GameController> {
   const GameView({super.key});
@@ -10,16 +13,34 @@ class GameView extends GetView<GameController> {
     return Scaffold(
       appBar: AppBar(
         title: Obx(() => Text(
-            "${controller.currentSession.value.host_name} VS ${controller.currentSession.value.guest_name}")),
+            "${controller.currentSession.value.host_name} Против ${controller.currentSession.value.guest_name}")),
         centerTitle: true,
       ),
-      body: Center(
+      body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 20,
+            Center(
+              child: SizedBox(
+                height: Get.width * .8,
+                width: Get.width * .8,
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 9,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Obx(() => XOFieldView(
+                          index,
+                          controller.playerMove.value,
+                          () => controller.changePlayerMove(),
+                          controller.fields[index],
+                        ));
+                  },
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3),
+                ),
+              ),
             ),
+            const Flexible(child: Center()),
             ElevatedButton(
               onPressed: () {
                 if (controller.currentSession.value.host_name ==

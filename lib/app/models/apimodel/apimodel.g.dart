@@ -20,7 +20,7 @@ Map<String, dynamic> _$$ApiModelImplToJson(_$ApiModelImpl instance) =>
 
 _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
     _$UserDataImpl(
-      in_session: json['in_session'] as String? ?? null,
+      in_session: json['in_session'] as String? ?? '',
       username: json['username'] as String? ?? '',
     );
 

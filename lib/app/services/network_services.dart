@@ -65,7 +65,6 @@ class NetworkServices extends GetxController {
       }
     } catch (e) {
       print("Ошибка: $e");
-      return null;
     }
   }
 
@@ -82,7 +81,6 @@ class NetworkServices extends GetxController {
       }
     } catch (erorr) {
       print(erorr);
-      return null;
     }
   }
 

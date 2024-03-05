@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:tictactoetest/app/core/constants.dart';
 import 'package:tictactoetest/app/models/apimodel/apimodel.dart';
 import 'package:tictactoetest/app/models/connection/connection.dart';
+import 'package:tictactoetest/app/modules/game/xofield/xofield_controller.dart';
+import 'package:tictactoetest/app/modules/game/xofield/xofield_veiw.dart';
 import 'package:tictactoetest/app/routes/app_pages.dart';
 import 'package:tictactoetest/app/services/network_services.dart';
 import 'package:tictactoetest/app/services/storage_service.dart';
-
 
 class GameController extends GetxController {
   StorageService get storageService => Get.find<StorageService>();
@@ -19,7 +20,10 @@ class GameController extends GetxController {
     updateLocalData();
     print(currentSession.value);
     super.onInit();
+  
   }
+
+
 
   Future<void> updateLocalData() async {
     currentSession.value = await storageService.readSessionResponse('session');
@@ -31,18 +35,48 @@ class GameController extends GetxController {
       updateLocalData();
       Get.offAndToNamed(Routes.LOBBY);
     } else {
-      Get.snackbar("Ошибка", "Не удалось сменить никнейм",
-          backgroundColor: Colors.red);
+      Get.snackbar("Ошибка", "Не удалось выйти", backgroundColor: Colors.red);
     }
   }
+
   void onCellTapped(int index) {
     if (currentSession.value.gameState == GameState.Ongoing &&
-        getCellValue(index) == "") {
-    }
+        getCellValue(index) == "") {}
   }
 
   String getCellValue(int index) {
     return currentSession.value.board?[index] ?? "";
   }
 
+  var playerMove = XOState.x.obs;
+  var playerSide = XOState.x.obs;
+  var gameIsEnd = false.obs;
+  var count = 0.obs;
+  late RxList<XOFieldController> fields;
+  var gameText = 'Ход Х'.obs;
+
+  void changePlayerMove() {
+    gameIsEnd.value = checkGameEnd();
+    if (gameIsEnd.value) return;
+
+    playerMove.value = playerMove.value == XOState.x ? XOState.o : XOState.x;
+    gameText.value = "Ход ${playerMove.value}";
+    count.value++;
+  }
+
+  void initFields() {
+    fields = List.generate(9, (index) {
+      return Get.put(XOFieldController(num: index),
+          tag: "$controllerTag$index");
+    }).obs;
+  }
+
+  bool checkGameEnd() {
+    if (count.value == 8) {
+      gameIsEnd.value = true;
+      gameText.value = "Закончились ходы";
+      return true;
+    }
+    return false;
+  }
 }

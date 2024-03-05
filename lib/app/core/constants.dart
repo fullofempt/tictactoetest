@@ -18,8 +18,4 @@ enum GameState {
   Draw;
 }
 
-enum XOState {
-  x,
-  o,
-  e,
-}
+

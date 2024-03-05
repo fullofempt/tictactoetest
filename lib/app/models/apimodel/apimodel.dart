@@ -18,7 +18,7 @@ class ApiModel with _$ApiModel {
 @freezed
 class UserData with _$UserData {
   factory UserData({
-    @Default(null) String? in_session,
+    @Default('') String? in_session,
     @Default('') String username,
   }) = _UserData;
 
