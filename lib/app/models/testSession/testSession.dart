@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tictactoetest/app/core/constants.dart';
+import 'package:tictactoetest/app/models/connection/connection.dart';
 
 part 'testSession.freezed.dart';
 part 'testSession.g.dart';
@@ -16,4 +17,6 @@ class TestSession with _$TestSession {
   }) = _TestSession;
 
   factory TestSession.fromJson(Map<String, dynamic> json) => _$TestSessionFromJson(json);
+
+  static void assignAll(List<Connection> list) {}
 }

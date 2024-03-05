@@ -96,12 +96,15 @@ class NetworkServices extends GetxController {
               }));
       if (response.statusCode == 200) {
         var responseSession = ApiModel.fromJson(response.data);
-        await storageService.writeSessionResponse("session", responseSession as Connection);
+        await storageService.writeSessionResponse(
+            "session", responseSession as Connection);
         var data = await storageService.readUserResponse("user");
         var updateUserResponse = ApiModel(
             user: UserData(
-                in_session: responseSession.private_key, username: data.user.username));
-        await storageService.writeUserResponse("user", updateUserResponse as Connection);
+                in_session: responseSession.private_key,
+                username: data.user.username));
+        await storageService.writeUserResponse(
+            "user", updateUserResponse as Connection);
         return true;
       } else {
         return false;
@@ -123,10 +126,37 @@ class NetworkServices extends GetxController {
       var data = await storageService.readUserResponse("user");
       var updateUserResponse = ApiModel(
           user: UserData(in_session: sessionId, username: data.user.username));
-      await storageService.writeUserResponse("user", updateUserResponse as Connection);
+      await storageService.writeUserResponse(
+          "user", updateUserResponse as Connection);
       return true;
     } else {
       print("Не удалось подключиться");
+      return false;
+    }
+  }
+
+  Future<bool> leaveSession(who) async {
+    try {
+      var response = await httpClient.delete('$baseUrl/user/update',
+          options: Options(headers: <String, String>{
+            'authorization': await storageService.read('baseAuth') ?? '',
+          }));
+      if (response.statusCode == 200) {
+        if (who == 1) {
+          await storageService.delete('session');
+        }
+        var data = await storageService.readUserResponse('user');
+        var updateUser = ApiModel(
+            private_key: data.private_key,
+            user: UserData(in_session: null, username: data.user.username));
+        await storageService.writeUserResponse('user', updateUser as Connection);
+        return true;
+      } else {
+        print("Код ошибки: ${response.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      print("Ошибка: $e");
       return false;
     }
   }

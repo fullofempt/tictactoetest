@@ -1,23 +1,48 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tictactoetest/app/core/constants.dart';
+import 'package:tictactoetest/app/models/apimodel/apimodel.dart';
+import 'package:tictactoetest/app/models/connection/connection.dart';
+import 'package:tictactoetest/app/routes/app_pages.dart';
+import 'package:tictactoetest/app/services/network_services.dart';
+import 'package:tictactoetest/app/services/storage_service.dart';
+
 
 class GameController extends GetxController {
-  //TODO: Implement GameController
+  StorageService get storageService => Get.find<StorageService>();
+  NetworkServices get networkServices => Get.find<NetworkServices>();
+  Rx<Connection> currentSession = Connection().obs;
+  Rx<ApiModel> currentUser = ApiModel(user: UserData()).obs;
 
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
+    updateLocalData();
+    print(currentSession.value);
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> updateLocalData() async {
+    currentSession.value = await storageService.readSessionResponse('session');
+    currentUser.value = await storageService.readUserResponse('user');
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  Future<void> leaveSession(int who) async {
+    if (await networkServices.leaveSession(who)) {
+      updateLocalData();
+      Get.offAndToNamed(Routes.LOBBY);
+    } else {
+      Get.snackbar("Ошибка", "Не удалось сменить никнейм",
+          backgroundColor: Colors.red);
+    }
+  }
+  void onCellTapped(int index) {
+    if (currentSession.value.gameState == GameState.Ongoing &&
+        getCellValue(index) == "") {
+    }
   }
 
-  void increment() => count.value++;
+  String getCellValue(int index) {
+    return currentSession.value.board?[index] ?? "";
+  }
+
 }

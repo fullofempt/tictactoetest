@@ -15,8 +15,12 @@ class LobbyController extends GetxController {
   final sessionnameController = TextEditingController();
   Rx<ApiModel> currentUser = ApiModel(user: UserData()).obs;
 
+  get testSession => null;
+
+  get sessionId => null;
+
   @override
-  void onInit(){
+  void onInit() {
     updateLocalData();
     getSessions();
     super.onInit();
@@ -50,19 +54,19 @@ class LobbyController extends GetxController {
 
   Future<void> getSessions() async {
     TestSession.assignAll(await networkServices.getSessions() ?? []);
-    if (TestSession.isEmpty) {
-      Get.snackbar("Ошибка", "Не получилось получить сессии",
+    if (testSession.isEmpty) {
+      Get.snackbar("Ошибка", "Нет Сессии",
           backgroundColor: Colors.red);
     }
   }
 
-  Future<void> getSessionById(String sessionId) async {
+  Future<void> getSessionById(String sessions) async {
     var data = await networkServices.getSessionById(sessionId);
     if (data != null) {
       currentSession.value = data;
     } else {
       Get.snackbar(
-          "Ошибка", "Не получилось получить данные о конкретной сессии",
+          "Ошибка", "Нет ответа о сессии",
           backgroundColor: Colors.red);
     }
   }
