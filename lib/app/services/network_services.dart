@@ -8,10 +8,11 @@ import 'package:tictactoetest/app/models/testSession/testSession.dart';
 import 'package:tictactoetest/app/services/services.dart';
 import 'package:tictactoetest/app/services/storage_service.dart';
 
-var baseUrl = "https://ttt.bulbaman.me/user/add/";
+
 
 class NetworkServices extends GetxController {
   var httpClient = Dio();
+  var baseUrl = "https://ttt.bulbaman.me";
   var storageService = StorageService();
 
   Future<bool> addUser(String nickname) async {
@@ -19,7 +20,7 @@ class NetworkServices extends GetxController {
       var response = await httpClient.post('$baseUrl/user/add/$nickname');
       if (response.statusCode == 200) {
         var currentUser = ApiModel.fromJson(response.data);
-        await storageService.writeUser("user", currentUser);
+        await storageService.writeUserResponse("user", currentUser);
         getBaseAuth(currentUser);
         return true;
       } else {
@@ -102,7 +103,7 @@ class NetworkServices extends GetxController {
                 in_session: responseSession.private_key,
                 username: data.user.username));
         await storageService.writeUserResponse(
-            "user", updateUserResponse as Connection);
+            "user", updateUserResponse);
         return true;
       } else {
         return false;
@@ -125,7 +126,7 @@ class NetworkServices extends GetxController {
       var updateUserResponse = ApiModel(
           user: UserData(in_session: sessionId, username: data.user.username));
       await storageService.writeUserResponse(
-          "user", updateUserResponse as Connection);
+          "user", updateUserResponse);
       return true;
     } else {
       print("Не удалось подключиться");
@@ -148,7 +149,7 @@ class NetworkServices extends GetxController {
             private_key: data.private_key,
             user: UserData(in_session: null, username: data.user.username));
         await storageService.writeUserResponse(
-            'user', updateUser as Connection);
+            'user', updateUser);
         return true;
       } else {
         print("Код ошибки: ${response.statusCode}");

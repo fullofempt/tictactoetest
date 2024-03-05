@@ -33,15 +33,15 @@ class LobbyView extends GetView<LobbyController> {
                       ),
                       child: ListTile(
                         title: Text(
-                          "Сессия ${index + 1}: ${lobbyController.testSession[index].name}",
+                          "Игра № ${index + 1}: ${lobbyController.testSession[index].name}",
                           style: TextStyle(
-                            color: Color.fromARGB(255, 61, 0, 204),
+                            color: Color.fromARGB(255, 0, 0, 0),
                           ),
                         ),
                         subtitle: Text(
-                          "Имя хоста игры: ${lobbyController.testSession[index].host_name}",
+                          "Создатель: ${lobbyController.testSession[index].host_name}",
                           style: TextStyle(
-                            color: Color.fromARGB(255, 61, 0, 204),
+                            color: Color.fromARGB(255, 15, 15, 15),
                           ),
                         ),
                         onTap: () async {
@@ -168,7 +168,7 @@ class LobbyView extends GetView<LobbyController> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Obx(() => Text(
-                          "Никнейм: ${lobbyController.currentUser.value.user.username}",
+                          "${lobbyController.currentUser.value.user.username}",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

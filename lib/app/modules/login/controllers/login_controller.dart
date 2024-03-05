@@ -15,9 +15,9 @@ class LoginController extends GetxController {
 
   void login() async {
     print('https://ttt.bulbaman.me/user/add/${usernameController.text}');
-    var response = await httpClient
-          .post('https://ttt.bulbaman.me/user/add/${usernameController.text}');
-      print(response.data);
+    // var response = await httpClient
+    //       .post('https://ttt.bulbaman.me/user/add/${usernameController.text}');
+    //   print(response.data);
     if (await networkServices.addUser(usernameController.text)) {
       Get.offAndToNamed(Routes.LOBBY);
     } else {

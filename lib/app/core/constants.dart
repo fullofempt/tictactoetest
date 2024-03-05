@@ -3,7 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-const String mainUrl = 'https://ttt.bulbaman.me';
+const String baseUrl = 'https://ttt.bulbaman.me';
 
 enum GameState {
   @JsonValue("NotStarted")

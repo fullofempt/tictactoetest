@@ -12,14 +12,6 @@ class StorageService extends GetxService {
     return await storage.read(key: key);
   }
 
-  Future<void> writeUser(String key, ApiModel user) async {
-    await storage.write(key: key, value: jsonEncode(user.toJson()));
-  }
-
-  // Future<void> writeBaseAuth(String key, String baseAuth) async {
-  //   await storage.write(key: key, value: baseAuth);
-  // }
-
   Future<ApiModel> readUserResponse(String key) async {
     String? data = await storage.read(key: key);
     if (data != null) {
@@ -29,7 +21,7 @@ class StorageService extends GetxService {
     }
   }
 
-  Future<void> writeUserResponse(String key, Connection user) async {
+  Future<void> writeUserResponse(String key, ApiModel user) async {
     await storage.write(key: key, value: jsonEncode(user.toJson()));
   }
 
@@ -39,9 +31,10 @@ class StorageService extends GetxService {
 
   Future<Connection> readSessionResponse(String key) async {
     String? data = await storage.read(key: key);
-    if (data != null) {
+    if (data!=null){
       return Connection.fromJson(jsonDecode(data));
-    } else {
+    }
+    else {
       return Connection();
     }
   }
@@ -53,8 +46,4 @@ class StorageService extends GetxService {
   Future<void> delete(String key) async {
     await storage.delete(key: key);
   }
-}
-
-Future<void> initServices() async {
-  await Get.putAsync(() async => StorageService());
 }
