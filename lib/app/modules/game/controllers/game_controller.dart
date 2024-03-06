@@ -15,15 +15,22 @@ class GameController extends GetxController {
   Rx<Connection> currentSession = Connection().obs;
   Rx<ApiModel> currentUser = ApiModel(user: UserData()).obs;
 
+
+  var playerMove = XOState.x.obs;
+  var playerSide = XOState.x.obs;
+  var gameIsEnd = false.obs;
+  var count = 0.obs;
+  var fields = RxList<XOFieldController>.empty();
+  var gameText = 'Ход Х'.obs;
+
   @override
-  void onInit() async {
+  void onInit()  {
     updateLocalData();
     print(currentSession.value);
+    initFields();
+    print('init');
     super.onInit();
-  
   }
-
-
 
   Future<void> updateLocalData() async {
     currentSession.value = await storageService.readSessionResponse('session');
@@ -48,13 +55,6 @@ class GameController extends GetxController {
     return currentSession.value.board?[index] ?? "";
   }
 
-  var playerMove = XOState.x.obs;
-  var playerSide = XOState.x.obs;
-  var gameIsEnd = false.obs;
-  var count = 0.obs;
-  late RxList<XOFieldController> fields;
-  var gameText = 'Ход Х'.obs;
-
   void changePlayerMove() {
     gameIsEnd.value = checkGameEnd();
     if (gameIsEnd.value) return;
@@ -65,7 +65,7 @@ class GameController extends GetxController {
   }
 
   void initFields() {
-    fields = List.generate(9, (index) {
+    fields.value = List.generate(9, (index) {
       return Get.put(XOFieldController(num: index),
           tag: "$controllerTag$index");
     }).obs;
