@@ -181,6 +181,176 @@ abstract class _ApiModel implements ApiModel {
       throw _privateConstructorUsedError;
 }
 
+PlayerResponse _$PlayerResponseFromJson(Map<String, dynamic> json) {
+  return _PlayerResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PlayerResponse {
+  String get private_key => throw _privateConstructorUsedError;
+  UserData get player => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PlayerResponseCopyWith<PlayerResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PlayerResponseCopyWith<$Res> {
+  factory $PlayerResponseCopyWith(
+          PlayerResponse value, $Res Function(PlayerResponse) then) =
+      _$PlayerResponseCopyWithImpl<$Res, PlayerResponse>;
+  @useResult
+  $Res call({String private_key, UserData player});
+
+  $UserDataCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class _$PlayerResponseCopyWithImpl<$Res, $Val extends PlayerResponse>
+    implements $PlayerResponseCopyWith<$Res> {
+  _$PlayerResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? private_key = null,
+    Object? player = null,
+  }) {
+    return _then(_value.copyWith(
+      private_key: null == private_key
+          ? _value.private_key
+          : private_key // ignore: cast_nullable_to_non_nullable
+              as String,
+      player: null == player
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as UserData,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserDataCopyWith<$Res> get player {
+    return $UserDataCopyWith<$Res>(_value.player, (value) {
+      return _then(_value.copyWith(player: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$PlayerResponseImplCopyWith<$Res>
+    implements $PlayerResponseCopyWith<$Res> {
+  factory _$$PlayerResponseImplCopyWith(_$PlayerResponseImpl value,
+          $Res Function(_$PlayerResponseImpl) then) =
+      __$$PlayerResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String private_key, UserData player});
+
+  @override
+  $UserDataCopyWith<$Res> get player;
+}
+
+/// @nodoc
+class __$$PlayerResponseImplCopyWithImpl<$Res>
+    extends _$PlayerResponseCopyWithImpl<$Res, _$PlayerResponseImpl>
+    implements _$$PlayerResponseImplCopyWith<$Res> {
+  __$$PlayerResponseImplCopyWithImpl(
+      _$PlayerResponseImpl _value, $Res Function(_$PlayerResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? private_key = null,
+    Object? player = null,
+  }) {
+    return _then(_$PlayerResponseImpl(
+      private_key: null == private_key
+          ? _value.private_key
+          : private_key // ignore: cast_nullable_to_non_nullable
+              as String,
+      player: null == player
+          ? _value.player
+          : player // ignore: cast_nullable_to_non_nullable
+              as UserData,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PlayerResponseImpl implements _PlayerResponse {
+  _$PlayerResponseImpl({this.private_key = "", required this.player});
+
+  factory _$PlayerResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlayerResponseImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final String private_key;
+  @override
+  final UserData player;
+
+  @override
+  String toString() {
+    return 'PlayerResponse(private_key: $private_key, player: $player)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PlayerResponseImpl &&
+            (identical(other.private_key, private_key) ||
+                other.private_key == private_key) &&
+            (identical(other.player, player) || other.player == player));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, private_key, player);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PlayerResponseImplCopyWith<_$PlayerResponseImpl> get copyWith =>
+      __$$PlayerResponseImplCopyWithImpl<_$PlayerResponseImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PlayerResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PlayerResponse implements PlayerResponse {
+  factory _PlayerResponse(
+      {final String private_key,
+      required final UserData player}) = _$PlayerResponseImpl;
+
+  factory _PlayerResponse.fromJson(Map<String, dynamic> json) =
+      _$PlayerResponseImpl.fromJson;
+
+  @override
+  String get private_key;
+  @override
+  UserData get player;
+  @override
+  @JsonKey(ignore: true)
+  _$$PlayerResponseImplCopyWith<_$PlayerResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 UserData _$UserDataFromJson(Map<String, dynamic> json) {
   return _UserData.fromJson(json);
 }

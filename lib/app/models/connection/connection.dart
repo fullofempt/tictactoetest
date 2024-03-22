@@ -16,6 +16,7 @@ class Connection with _$Connection {
     @Default("") String host_name,
     @Default("") String id,
     @Default("") String name,
+    String? currentTurnPlayerId,
   ]) = _Connection;
 
   factory Connection.fromJson(Map<String, dynamic> json) =>

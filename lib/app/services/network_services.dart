@@ -68,6 +68,8 @@ class NetworkServices extends GetxController {
     }
   }
 
+  // Futuere<Connection?> updateGameState(sessionI)
+
   Future<Connection?> getSessionById(sessionId) async {
     try {
       var response = await httpClient.get('$baseUrl/session/get/$sessionId');

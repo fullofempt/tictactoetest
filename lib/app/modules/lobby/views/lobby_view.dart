@@ -129,7 +129,6 @@ class LobbyView extends GetView<LobbyController> {
             Container(
               margin: EdgeInsets.only(top: 50),
               child: ElevatedButton(
-                
                 onPressed: () async {
                   await showDialog(
                     context: context,
@@ -162,6 +161,12 @@ class LobbyView extends GetView<LobbyController> {
                 },
                 child: Text("Создать сессию"),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                controller.refreshSessions();
+              },
+              child: Text("Обновить сессии"),
             ),
             Align(
               alignment: Alignment.bottomCenter,

@@ -18,6 +18,19 @@ Map<String, dynamic> _$$ApiModelImplToJson(_$ApiModelImpl instance) =>
       'user': instance.user,
     };
 
+_$PlayerResponseImpl _$$PlayerResponseImplFromJson(Map<String, dynamic> json) =>
+    _$PlayerResponseImpl(
+      private_key: json['private_key'] as String? ?? "",
+      player: UserData.fromJson(json['player'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$PlayerResponseImplToJson(
+        _$PlayerResponseImpl instance) =>
+    <String, dynamic>{
+      'private_key': instance.private_key,
+      'player': instance.player,
+    };
+
 _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
     _$UserDataImpl(
       in_session: json['in_session'] as String? ?? '',

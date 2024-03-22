@@ -34,8 +34,8 @@ class LobbyController extends GetxController {
       updateLocalData();
       Get.back();
     } else {
-      Get.snackbar("Ошибка", "Не удалось создать сессию",
-          backgroundColor: Colors.red);
+      Get.snackbar("Создание успешно", "Вы создали сессию",
+          backgroundColor: Colors.green);
     }
   }
 
@@ -85,5 +85,9 @@ class LobbyController extends GetxController {
       Get.snackbar("Ошибка", "Не удается сменить пользователя",
           backgroundColor: Colors.red);
     }
+  }
+
+  Future<void> refreshSessions() async {
+    await getSessions();
   }
 }

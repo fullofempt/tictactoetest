@@ -17,6 +17,7 @@ _$ConnectionImpl _$$ConnectionImplFromJson(Map<String, dynamic> json) =>
       json['host_name'] as String? ?? "",
       json['id'] as String? ?? "",
       json['name'] as String? ?? "",
+      json['currentTurnPlayerId'] as String?,
     );
 
 Map<String, dynamic> _$$ConnectionImplToJson(_$ConnectionImpl instance) =>
@@ -28,6 +29,7 @@ Map<String, dynamic> _$$ConnectionImplToJson(_$ConnectionImpl instance) =>
       'host_name': instance.host_name,
       'id': instance.id,
       'name': instance.name,
+      'currentTurnPlayerId': instance.currentTurnPlayerId,
     };
 
 const _$GameStateEnumMap = {

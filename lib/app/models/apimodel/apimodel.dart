@@ -16,6 +16,18 @@ class ApiModel with _$ApiModel {
 }
 
 @freezed
+class PlayerResponse with _$PlayerResponse {
+  factory PlayerResponse({
+    @Default("") String private_key,
+    required UserData player,
+  }) = _PlayerResponse;
+
+  factory PlayerResponse.fromJson(Map<String, dynamic> json) =>
+      _$PlayerResponseFromJson(json);
+  factory PlayerResponse.withUser(UserData newPlayer) => PlayerResponse(player: newPlayer);
+}
+
+@freezed
 class UserData with _$UserData {
   factory UserData({
     @Default('') String? in_session,

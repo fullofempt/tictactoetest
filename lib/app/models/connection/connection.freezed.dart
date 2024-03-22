@@ -28,6 +28,7 @@ mixin _$Connection {
   String get host_name => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String? get currentTurnPlayerId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,7 +49,8 @@ abstract class $ConnectionCopyWith<$Res> {
       List<String> history,
       String host_name,
       String id,
-      String name});
+      String name,
+      String? currentTurnPlayerId});
 }
 
 /// @nodoc
@@ -71,6 +73,7 @@ class _$ConnectionCopyWithImpl<$Res, $Val extends Connection>
     Object? host_name = null,
     Object? id = null,
     Object? name = null,
+    Object? currentTurnPlayerId = freezed,
   }) {
     return _then(_value.copyWith(
       board: freezed == board
@@ -101,6 +104,10 @@ class _$ConnectionCopyWithImpl<$Res, $Val extends Connection>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      currentTurnPlayerId: freezed == currentTurnPlayerId
+          ? _value.currentTurnPlayerId
+          : currentTurnPlayerId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -120,7 +127,8 @@ abstract class _$$ConnectionImplCopyWith<$Res>
       List<String> history,
       String host_name,
       String id,
-      String name});
+      String name,
+      String? currentTurnPlayerId});
 }
 
 /// @nodoc
@@ -141,6 +149,7 @@ class __$$ConnectionImplCopyWithImpl<$Res>
     Object? host_name = null,
     Object? id = null,
     Object? name = null,
+    Object? currentTurnPlayerId = freezed,
   }) {
     return _then(_$ConnectionImpl(
       freezed == board
@@ -171,6 +180,10 @@ class __$$ConnectionImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      freezed == currentTurnPlayerId
+          ? _value.currentTurnPlayerId
+          : currentTurnPlayerId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -185,7 +198,8 @@ class _$ConnectionImpl implements _Connection {
       final List<String> history = const [],
       this.host_name = "",
       this.id = "",
-      this.name = ""])
+      this.name = "",
+      this.currentTurnPlayerId])
       : _board = board,
         _history = history;
 
@@ -225,10 +239,12 @@ class _$ConnectionImpl implements _Connection {
   @override
   @JsonKey()
   final String name;
+  @override
+  final String? currentTurnPlayerId;
 
   @override
   String toString() {
-    return 'Connection(board: $board, gameState: $gameState, guest_name: $guest_name, history: $history, host_name: $host_name, id: $id, name: $name)';
+    return 'Connection(board: $board, gameState: $gameState, guest_name: $guest_name, history: $history, host_name: $host_name, id: $id, name: $name, currentTurnPlayerId: $currentTurnPlayerId)';
   }
 
   @override
@@ -245,7 +261,9 @@ class _$ConnectionImpl implements _Connection {
             (identical(other.host_name, host_name) ||
                 other.host_name == host_name) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.currentTurnPlayerId, currentTurnPlayerId) ||
+                other.currentTurnPlayerId == currentTurnPlayerId));
   }
 
   @JsonKey(ignore: true)
@@ -258,7 +276,8 @@ class _$ConnectionImpl implements _Connection {
       const DeepCollectionEquality().hash(_history),
       host_name,
       id,
-      name);
+      name,
+      currentTurnPlayerId);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +301,8 @@ abstract class _Connection implements Connection {
       final List<String> history,
       final String host_name,
       final String id,
-      final String name]) = _$ConnectionImpl;
+      final String name,
+      final String? currentTurnPlayerId]) = _$ConnectionImpl;
 
   factory _Connection.fromJson(Map<String, dynamic> json) =
       _$ConnectionImpl.fromJson;
@@ -302,6 +322,8 @@ abstract class _Connection implements Connection {
   String get id;
   @override
   String get name;
+  @override
+  String? get currentTurnPlayerId;
   @override
   @JsonKey(ignore: true)
   _$$ConnectionImplCopyWith<_$ConnectionImpl> get copyWith =>
